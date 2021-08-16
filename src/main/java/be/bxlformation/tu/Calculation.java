@@ -9,6 +9,8 @@ public class Calculation {
 //        Personne personne = new Personne();
 //        String fields = Arrays.toString(personne.getClass().getDeclaredFields());
 //        System.out.println(fields);
+        Triangle triangle = new Triangle();
+        System.out.println(triangle.checkTriangle());
     }
 
     public int addition(int a, int b) {

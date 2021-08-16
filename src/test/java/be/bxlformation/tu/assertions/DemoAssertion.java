@@ -120,6 +120,7 @@ public class DemoAssertion {
 
     @Test
     @EnabledForJreRange(
+
             min = JRE.JAVA_8,
             max = JRE.JAVA_12
     )
