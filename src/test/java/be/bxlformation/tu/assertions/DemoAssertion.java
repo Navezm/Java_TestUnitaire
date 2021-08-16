@@ -54,6 +54,7 @@ public class DemoAssertion {
      * Test qu'un objet personne contienne bien un nom et un prenom
      */
 
+
     @Test
     void testPersonneContientNomEtPrenom() {
         Personne personne = new Personne();
