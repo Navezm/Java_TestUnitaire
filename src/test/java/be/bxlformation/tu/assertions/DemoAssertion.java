@@ -4,7 +4,6 @@ import be.bxlformation.tu.Calculation;
 import be.bxlformation.tu.Personne;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
 import java.time.Duration;
 import java.util.Arrays;
 
@@ -13,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DemoAssertion {
 
     private final Calculation calculation = new Calculation();
+
+    private final Personne p = new Personne("Navez", "Martin");
 
     @Test
     void standardAssertions() {
@@ -40,6 +41,17 @@ public class DemoAssertion {
         assertEquals("/ by zero", e.getMessage());
     }
 
+//    @Test
+//    void testDivisionParZero() {
+//        ArithmeticException e = null;
+//        try {
+//            calculation.division(1, 2);
+//        } catch (ArithmeticException exc) {
+//            e = exc;
+//        }
+//        assertNull(e);
+//    }
+
     @Test
     void timeOutNotExceeded() {
         String result = assertTimeout(Duration.ofMillis(1), DemoAssertion::nawak);
@@ -54,23 +66,37 @@ public class DemoAssertion {
      * Test qu'un objet personne contienne bien un nom et un prenom
      */
 
-
     @Test
     void testPersonneContientNomEtPrenom() {
-        Personne personne = new Personne();
-        String fields = Arrays.toString(personne.getClass().getDeclaredFields());
-        assertEquals("[private java.lang.String be.bxlformation.tu.Personne.nom, private java.lang.String be.bxlformation.tu.Personne.prenom]", fields);
+        String fields = Arrays.toString(p.getClass().getDeclaredFields());
+        assertEquals("[private java.lang.String be.bxlformation.tu.Personne.name, private java.lang.String be.bxlformation.tu.Personne.surname]", fields);
     }
 
-//    @Test
-//    void testDivisionParZero() {
-//        ArithmeticException e = null;
-//        try {
-//            calculation.division(1, 2);
-//        } catch (ArithmeticException exc) {
-//            e = exc;
-//        }
-//        assertNull(e);
-//    }
+    @Test
+    void testPersonne() {
+        assertAll("person",
+                    () -> assertEquals("Navez", p.getName()),
+                    () -> assertEquals("Martin", p.getSurname())
+                );
+    }
+
+    @Test
+    void dependantAssertions() {
+        assertAll("properties",
+                () -> {
+                    assertNotNull(p.getSurname());
+                    assertAll("first_name",
+                            () -> assertTrue(p.getSurname().startsWith("M")),
+                            () -> assertTrue(p.getSurname().endsWith("n"))
+                            );
+                },
+                () -> {
+                    assertNotNull(p.getName());
+                    assertAll("last_name",
+                            () -> assertTrue(p.getName().contains("ez"))
+                    );
+                }
+                );
+    }
 
 }

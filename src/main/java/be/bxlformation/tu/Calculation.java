@@ -6,9 +6,9 @@ import java.util.Arrays;
 public class Calculation {
 
     public static void main(String[] args) {
-        Personne personne = new Personne();
-        String fields = Arrays.toString(personne.getClass().getDeclaredFields());
-        System.out.println(fields);
+//        Personne personne = new Personne();
+//        String fields = Arrays.toString(personne.getClass().getDeclaredFields());
+//        System.out.println(fields);
     }
 
     public int addition(int a, int b) {
