@@ -1,5 +1,9 @@
 package be.bxlformation.tu;
 
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class FirstTest {
 
     /**
@@ -16,9 +20,17 @@ public class FirstTest {
     // Act : exécution du test avec les entrants et sauvegarde des sortants
     // Assert : valider les sortant en fonction de ce qui est attendu avec nos entrants
 
-
+    @Test
     void premierTest() {
+        // ARRANGE
+        int a = 3, b = 4;
+        Calculation firstTest = new Calculation();
 
+        // ACT
+        int result = firstTest.addition(a,b);
+
+        // ASSERT
+        assertEquals(result, 7);
     }
 
 }
