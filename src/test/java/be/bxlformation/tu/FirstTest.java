@@ -1,9 +1,14 @@
 package be.bxlformation.tu;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Première classe de test")
+//@DisplayNameGeneration(DisplayNameGenerator.Standard.class)
 public class FirstTest {
 
     /**
@@ -21,7 +26,8 @@ public class FirstTest {
     // Assert : valider les sortant en fonction de ce qui est attendu avec nos entrants
 
     @Test
-    void premierTest() {
+    @DisplayName("Ceci est mon premier test sur la validité de l'addition")
+    void premierTestSucces() {
         // ARRANGE
         int a = 3, b = 4;
         Calculation firstTest = new Calculation();
@@ -33,4 +39,28 @@ public class FirstTest {
         assertEquals(result, 7);
     }
 
+    @Test
+    void premierTestFailCarPasEntier() {
+        // ARRANGE
+        String inputUtilisateur_a = "3", inputUtilisateur_b = "4";
+        int result;
+        NumberFormatException e = null;
+
+        // ACT
+        try {
+            result = Integer.parseInt(inputUtilisateur_a);
+            result = Integer.parseInt(inputUtilisateur_b);
+        } catch (NumberFormatException exc) {
+            e = exc;
+
+        }
+
+        // ASSERT
+        assertNull(e);
+    }
+
+    @Test
+    void nom_de_test_autogenere() {
+
+    }
 }
