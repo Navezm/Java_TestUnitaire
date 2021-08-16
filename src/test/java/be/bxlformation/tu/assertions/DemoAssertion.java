@@ -2,8 +2,14 @@ package be.bxlformation.tu.assertions;
 
 import be.bxlformation.tu.Calculation;
 import be.bxlformation.tu.Personne;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.*;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.time.Duration;
 import java.util.Arrays;
 
@@ -52,6 +58,7 @@ public class DemoAssertion {
 //        assertNull(e);
 //    }
 
+    @Disabled
     @Test
     void timeOutNotExceeded() {
         String result = assertTimeout(Duration.ofMillis(1), DemoAssertion::nawak);
@@ -96,7 +103,51 @@ public class DemoAssertion {
                             () -> assertTrue(p.getName().contains("ez"))
                     );
                 }
-                );
+        );
+    }
+
+    // Création d'une annotation personnalisée
+    @Target({ElementType.METHOD, ElementType.TYPE})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Test
+    @EnabledOnOs(OS.WINDOWS) // Permet de faire tourner ce test seulement si on est sur Windows
+    @interface TestOnWindows {}
+
+    @TestOnWindows
+    void OSTests() {
+
+    }
+
+    @Test
+    @EnabledForJreRange(
+            min = JRE.JAVA_8,
+            max = JRE.JAVA_12
+    )
+    @EnabledOnJre(JRE.JAVA_8)
+    void onlyOnJava8() {
+
+    }
+
+    @Test
+    @EnabledIfSystemProperty(named = "os.arch", matches = ".*64.*")
+    void onlyOn64BitsArchitecture() {
+
+    }
+
+    @Test
+    @EnabledIf("conditionPersonnalisee")
+    void enabledByCondition() {
+
+    }
+
+    @Test
+    @DisabledIf("conditionPersonnalisee")
+    void disabledByCondition() {
+
+    }
+
+    boolean conditionPersonnalisee() {
+        return true;
     }
 
 }
