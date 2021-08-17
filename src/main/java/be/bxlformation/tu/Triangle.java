@@ -41,23 +41,13 @@ public class Triangle {
     }
 
     public String checkTriangle() {
-        String phrase = null;
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("Donne moi un premier chiffre");
-        int a = Integer.parseInt(scan.nextLine());
-        System.out.println("Donne en moi un autre");
-        int b = Integer.parseInt(scan.nextLine());
-        System.out.println("Et un dernier");
-        int c = Integer.parseInt(scan.nextLine());
-
-        if (a == b && b == c) {
+        String phrase;
+        if (this.getSideA() == this.getSideB() && this.getSideB() == this.getSideC()) {
             return phrase = "Equilatéral";
-        } else if (a == b || a == c || b == c) {
+        } else if (this.getSideA() == this.getSideB() || this.getSideA() == this.getSideC() || this.getSideB() == this.getSideC()) {
             return phrase = "Isocèle";
         } else {
             return phrase = "Scalène";
         }
-
     }
 }
