@@ -1,5 +1,7 @@
 package be.bxlformation.tu;
 
+import be.bxlformation.tu.exercices.TriangleBF;
+import be.bxlformation.tu.exercices.TriangleException;
 import org.junit.jupiter.api.*;
 
 import java.lang.reflect.Field;

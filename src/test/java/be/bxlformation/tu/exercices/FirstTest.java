@@ -1,5 +1,6 @@
-package be.bxlformation.tu;
+package be.bxlformation.tu.exercices;
 
+import be.bxlformation.tu.Calculation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;

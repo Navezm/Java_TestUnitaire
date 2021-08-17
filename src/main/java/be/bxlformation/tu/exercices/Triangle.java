@@ -1,4 +1,4 @@
-package be.bxlformation.tu;
+package be.bxlformation.tu.exercices;
 
 public class Triangle {
 
