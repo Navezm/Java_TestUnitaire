@@ -2,6 +2,8 @@ package be.bxlformation.tu;
 
 import org.junit.jupiter.api.*;
 
+import java.lang.reflect.Field;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -24,8 +26,7 @@ public class TriangleTest {
     }
 
     @Nested
-    class TestEchecDeValidationDuTriangle {
-
+    class TestsEchecDeValidationDuTriangle {
         @Test
         void uneValeurVautZeroTest_A() {
             triangle.setA(0);
@@ -181,6 +182,76 @@ public class TriangleTest {
                         assertEquals("La somme de deux côtés est inférieure au troisième", exception.getMessage());
                     }
             );
+        }
+
+        @Test
+        void triangleDoitContenir3ProprietesDeTypeInt() {
+            Field[] fields = TriangleBF.class.getDeclaredFields();
+
+            assertEquals(3, fields.length);
+
+            assertAll("proprieteTypeInt",
+                    () -> assertEquals(int.class, fields[0].getType()),
+                    () -> assertEquals(int.class, fields[1].getType()),
+                    () -> assertEquals(int.class, fields[2].getType())
+                    );
+        }
+    }
+
+    @Nested
+    class TestsSuccesValidationTriangle {
+        @Test
+        void triangleEstEquilateral() throws TriangleException {
+            triangle.setB(3);
+            triangle.setC(3);
+
+            assertEquals("équilatéral", triangle.checkValidity(
+                    triangle.getA(),
+                    triangle.getB(),
+                    triangle.getC()
+            ));
+        }
+
+        @Test
+        void triangleEstIsoceleDeBase_A() throws TriangleException {
+            triangle.setB(6);
+
+            assertEquals("isocèle", triangle.checkValidity(
+                    triangle.getA(),
+                    triangle.getB(),
+                    triangle.getC()
+            ));
+        }
+
+        @Test
+        void triangleEstIsoceleDeBase_B() throws TriangleException {
+            triangle.setA(6);
+
+            assertEquals("isocèle", triangle.checkValidity(
+                    triangle.getA(),
+                    triangle.getB(),
+                    triangle.getC()
+            ));
+        }
+
+        @Test
+        void triangleEstIsoceleDeBase_C() throws TriangleException {
+            triangle.setA(4);
+
+            assertEquals("isocèle", triangle.checkValidity(
+                    triangle.getA(),
+                    triangle.getB(),
+                    triangle.getC()
+            ));
+        }
+
+        @Test
+        void triangleEstScalaire() throws TriangleException {
+            assertEquals("scalène", triangle.checkValidity(
+                    triangle.getA(),
+                    triangle.getB(),
+                    triangle.getC()
+            ));
         }
     }
 
