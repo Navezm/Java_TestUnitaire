@@ -8,14 +8,14 @@ public class Exercice {
 
     @Test
     void testNombre() {
-        String inputUtilisateur_a = "3", inputUtilisateur_b = "4", inputUtilisateur_c = "4";
+        String a = "3", b = "4", c = "4";
         int result;
         NumberFormatException e = null;
 
         try {
-            result = Integer.parseInt(inputUtilisateur_a);
-            result = Integer.parseInt(inputUtilisateur_b);
-            result = Integer.parseInt(inputUtilisateur_c);
+            result = Integer.parseInt(a);
+            result = Integer.parseInt(b);
+            result = Integer.parseInt(c);
         } catch (NumberFormatException exc) {
             e = exc;
         }
@@ -25,7 +25,7 @@ public class Exercice {
 
     @Test
     void testZero() {
-        Triangle triangle = new Triangle(4,3,2);
+        Triangle triangle = new Triangle(4,3,1);
         assertTrue(triangle.getSideA() > 0 && triangle.getSideB() > 0 && triangle.getSideC() > 0);
     }
 
@@ -56,4 +56,18 @@ public class Exercice {
         assertEquals("Scalène", phrase);
     }
 
+    @Test
+    void testCote() {
+        Triangle triangle = new Triangle(2,6,7);
+
+        boolean testOk = false;
+
+        if (triangle.getSideA() + triangle.getSideB() > triangle.getSideC() ||
+            triangle.getSideB() + triangle.getSideC() > triangle.getSideA() ||
+            triangle.getSideC() + triangle.getSideA() > triangle.getSideB()) {
+            testOk = true;
+        }
+
+        assertTrue(testOk);
+    }
 }

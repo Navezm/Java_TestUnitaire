@@ -1,19 +1,19 @@
 package be.bxlformation.tu;
 
-import java.util.Scanner;
-
 public class Triangle {
 
     private int sideA;
     private int sideB;
     private int sideC;
 
-    public Triangle(){}
+    private Triangle(){}
 
     public Triangle(int sideA, int sideB, int sideC) {
-        this.sideA = sideA;
-        this.sideB = sideB;
-        this.sideC = sideC;
+        if (sideA > 0 && sideB > 0 && sideC > 0) {
+            this.sideA = sideA;
+            this.sideB = sideB;
+            this.sideC = sideC;
+        }
     }
 
     public int getSideA() {
@@ -42,9 +42,12 @@ public class Triangle {
 
     public String checkTriangle() {
         String phrase;
-        if (this.getSideA() == this.getSideB() && this.getSideB() == this.getSideC()) {
+        if (this.getSideA() == this.getSideB() &&
+                this.getSideB() == this.getSideC()) {
             return phrase = "Equilatéral";
-        } else if (this.getSideA() == this.getSideB() || this.getSideA() == this.getSideC() || this.getSideB() == this.getSideC()) {
+        } else if (this.getSideA() == this.getSideB() ||
+                this.getSideA() == this.getSideC() ||
+                this.getSideB() == this.getSideC()) {
             return phrase = "Isocèle";
         } else {
             return phrase = "Scalène";
